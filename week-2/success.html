@@ -3,30 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Success | Campus Placement Portal</title>
+  <title>Welcome | ANITS Portal</title>
   <link rel="stylesheet" href="Style.css" />
+  <style>
+    body.success-page { background: url('assets/bg.jpg') center/cover no-repeat; min-height:100vh; color:#fff; margin:0; font-family: Arial, Helvetica, sans-serif; }
+    .panel{ max-width:900px; margin:60px auto; padding:24px; background: rgba(255,255,255,0.12); border-radius:8px; backdrop-filter: blur(6px); }
+    .notice{ padding:12px; border-left:6px solid #f39c12; background: rgba(0,0,0,0.25); color:#fff; }
+    .notice ul{ margin:10px 0 0 20px; }
+  </style>
 </head>
-<body>
-  <header>
-    <div class="logo-section">
-      <img src="assets/anits.jpeg" alt="College Logo" width="80" height="80" />
-      <div class="title">
-        <h1>ANITS - Placement Portal</h1>
-      </div>
-    </div>
-  </header>
+<body class="success-page">
+  <header style="text-align:center;padding-top:24px;"><h1>Anil Neerukonda Institute of Technology & Sciences</h1></header>
 
-  <main style="text-align:center;padding:80px;">
-    <article class="card" style="width:600px;margin:0 auto;">
-      <h2>Success!</h2>
-      <p>Your form has been submitted (or you have logged in). Thank you.</p>
-      <p><a href="index.html"><button>Return to Home</button></a></p>
-    </article>
+  <main class="panel">
+    <h2 style="color:#9fe2a6">Login Successful!</h2>
+    <p>Welcome to ANITS Central Placement Portal</p>
+    <p>Login Time: <span id="lt"></span></p>
+
+    <section class="notice" aria-label="Important Notice">
+      <h3 style="color:#fff">Important Notice</h3>
+      <ul>
+        <li>Please contact the Training & Placement Office regularly for updates.</li>
+        <li>Stay informed about the latest MAANG Companies Recruitment Process.</li>
+        <li>Check your registered E-mail ID and Placement Portal for announcements.</li>
+        <li>Attend all Pre-Placement Talks (PPTs), Mock Interviews, and Company Drives.</li>
+        <li>Keep your Resume, Academic Documents, and ID Card ready before recruitment processes.</li>
+      </ul>
+    </section>
   </main>
 
-  <footer>
-    <h3>© 2026 ANITS | Department of Training & Placement</h3>
-    <p>Sangivalasa, Visakhapatnam, Andhra Pradesh</p>
-  </footer>
+  <script>
+    // display login time
+    document.getElementById('lt').textContent = new Date().toLocaleString();
+    // guard - require login
+    if(sessionStorage.getItem('loggedIn') !== 'true'){
+      window.location.replace('login.html');
+    }
+  </script>
 </body>
 </html>
