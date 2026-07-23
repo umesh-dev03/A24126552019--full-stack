@@ -3,51 +3,107 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login | Campus Placement Portal</title>
+  <title>Login | ANITS Placement Portal</title>
   <link rel="stylesheet" href="Style.css" />
+  <style>
+    body.login-page {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background-image: url('assets/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position:relative;
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body.login-page::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,0.45);
+      z-index:0;
+    }
+    .login-card{
+      position:relative;
+      z-index:1;
+      width:360px;
+      padding:24px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      color: #fff;
+      text-align:center;
+    }
+    .login-card h2{ margin-bottom:18px; color:#fff; }
+    .login-card label{ display:block; text-align:left; margin:8px 0 4px; font-size:13px; color:#eef;}
+    .login-card input[type="text"],
+    .login-card input[type="password"]{
+      width:100%;
+      padding:10px;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color:#fff;
+      outline:none;
+    }
+    .login-card .btn{
+      margin-top:14px;
+      width:100%;
+      padding:10px;
+      border-radius:6px;
+      border:0;
+      background:#2b7bd3;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .error{ color:#ffb3b3; font-size:13px; margin-top:8px; text-align:left;}
+    .logo{ height:56px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto; border-radius:6px;}
+    @media(max-width:420px){ .login-card{ width:90%; padding:16px; } }
+  </style>
 </head>
-<body>
-  <header>
-    <div class="logo-section">
-      <img src="assets/anits.jpeg" alt="College Logo" width="80" height="80" />
-      <div class="title">
-        <h1>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h1>
-        <h2>Campus Placement Portal</h2>
-      </div>
-    </div>
-  </header>
+<body class="login-page">
+  <div class="login-card" role="main" aria-labelledby="loginTitle">
+    <img src="assets/anits.jpeg" alt="ANITS logo" class="logo" />
+    <h2 id="loginTitle">ANITS - User Login</h2>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="register.html">Register</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li><a href="companies.html">Companies</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+    <form id="loginForm" novalidate>
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required autocomplete="username" />
 
-  <main style="text-align:center; margin-top:60px;">
-    <article class="card" style="width:900px; margin:0 auto; padding:40px;">
-      <h2>Student Login</h2>
-      <form action="success.html" method="get">
-        <div style="text-align:left; margin:20px 70px;">
-          <label>Username</label><br>
-          <input type="text" name="student_name" required style="width:100%;" />
-          <br><br>
-          <label>Password</label><br>
-          <input type="password" name="password" required style="width:100%;" />
-          <br><br>
-          <input type="submit" value="Login" style="width:100%; padding:12px; background:blue; color:white; border:none; border-radius:6px; font-size:18px;" />
-        </div>
-      </form>
-    </article>
-  </main>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password" />
 
-  <footer>
-    <h3>© 2026 ANITS | Department of Training & Placement</h3>
-    <p>Sangivalasa, Visakhapatnam, Andhra Pradesh</p>
-  </footer>
+      <div id="error" class="error" aria-live="polite"></div>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+  <script>
+    // simple client-side form validation & redirect
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const err = document.getElementById('error');
+      err.textContent = '';
+
+      if(!user || !pass){
+        err.textContent = 'Please enter both username and password.';
+        return;
+      }
+
+      // Demo credentials (replace with server-side check later)
+      if(user === 'admin' && pass === 'admin123'){
+        sessionStorage.setItem('loggedIn','true');
+        window.location.href = 'success.html';
+      } else {
+        err.textContent = 'Invalid username or password.';
+      }
+    });
+  </script>
 </body>
 </html>
